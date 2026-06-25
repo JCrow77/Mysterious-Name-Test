@@ -11,7 +11,7 @@
   :root{
     --bg:#0d1117;--card:#161b22;--accent:#58a6ff;--accent2:#7c3aed;
     --red:#f85149;--green:#3fb950;--text:#e6edf3;--muted:#8b949e;
-    --border:#30363d;--radius:14px;
+    --border:#30363d;
   }
 
   body{
@@ -23,31 +23,34 @@
       radial-gradient(ellipse at 80% 80%,rgba(124,58,237,0.04) 0%,transparent 55%);
   }
   .container{width:100%;max-width:560px;position:relative}
-  .page{display:none;animation:fadeIn .45s ease}
+  .page{display:none;animation:fadeIn .4s ease}
   .page.active{display:block}
 
-  @keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
   @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
   @keyframes spin{to{transform:rotate(360deg)}}
-  @keyframes glitch{0%,100%{transform:translate(0)}20%{transform:translate(-2px,1px)}40%{transform:translate(2px,-1px)}60%{transform:translate(-1px,-1px)}80%{transform:translate(1px,1px)}}
-  @keyframes strikeThrough{from{width:0}to{width:100%}}
-  @keyframes popIn{0%{transform:scale(0);opacity:0}60%{transform:scale(1.2);opacity:1}100%{transform:scale(1);opacity:1}}
-  @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-4px)}40%{transform:translateX(4px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
-  @keyframes lockBounce{0%{transform:scale(0) rotate(-10deg)}50%{transform:scale(1.3) rotate(3deg)}70%{transform:scale(.9) rotate(-1deg)}100%{transform:scale(1) rotate(0)}}
-  @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+  @keyframes glitch{0%,100%{transform:translate(0)}20%{transform:translate(-2px,1px)}40%{transform:translate(2px,-1px)}60%{transform:translate(-1px,1px)}80%{transform:translate(1px,-1px)}}
+  @keyframes popIn{0%{transform:scale(0);opacity:0}50%{transform:scale(1.3)}100%{transform:scale(1);opacity:1}}
+  @keyframes lockBounce{0%{transform:scale(0) rotate(-10deg)}50%{transform:scale(1.25) rotate(4deg)}70%{transform:scale(.9) rotate(-2deg)}100%{transform:scale(1) rotate(0)}}
+  @keyframes scanLine{0%{top:0}100%{top:100%}}
+  @keyframes collapseOut{
+    0%{opacity:1;max-width:120px;padding:5px 10px;margin:3px;border-width:1.5px;font-size:13px}
+    20%{opacity:.8}
+    100%{opacity:0;max-width:0;padding:0 0;margin:0 0;border-width:0;font-size:0;min-width:0}
+  }
 
   /* ── Landing ── */
-  .landing{text-align:center;padding:30px 0}
+  .landing{text-align:center;padding:24px 0}
   .landing .icon{font-size:56px;display:block;animation:float 3s ease-in-out infinite}
-  .landing .badge{display:inline-block;padding:5px 14px;border-radius:20px;background:rgba(88,166,255,.12);color:var(--accent);font-size:12px;font-weight:600;margin-bottom:16px;letter-spacing:.5px}
-  .landing h1{font-size:28px;font-weight:900;line-height:1.4;margin-bottom:8px}
+  .landing .badge{display:inline-block;padding:5px 14px;border-radius:20px;background:rgba(88,166,255,.12);color:var(--accent);font-size:12px;font-weight:600;margin-bottom:14px}
+  .landing h1{font-size:28px;font-weight:900;line-height:1.4;margin-bottom:6px}
   .landing h1 .hl{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-  .landing .sub{color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:28px}
-  .landing .features{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:32px}
+  .landing .sub{color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:24px}
+  .landing .features{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:28px}
   .landing .feat{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:13px;color:var(--muted);text-align:center;min-width:100px;flex:1}
   .landing .feat span{display:block;font-size:22px;margin-bottom:4px}
 
-  .btn{display:inline-block;padding:14px 44px;border-radius:50px;font-size:16px;font-weight:700;border:none;cursor:pointer;transition:all .25s;font-family:inherit;text-decoration:none}
+  .btn{display:inline-block;padding:14px 44px;border-radius:50px;font-size:16px;font-weight:700;border:none;cursor:pointer;transition:all .25s;font-family:inherit}
   .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 4px 24px rgba(88,166,255,.25)}
   .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(88,166,255,.4)}
   .btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border)}
@@ -59,7 +62,7 @@
   .step{flex:1;height:3px;border-radius:2px;background:var(--border);transition:background .3s}
   .step.done{background:var(--accent)}.step.current{background:var(--accent2)}
   .q-badge{font-size:12px;color:var(--accent);font-weight:700;margin-bottom:6px}
-  .q-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:32px 28px;box-shadow:0 8px 32px rgba(0,0,0,.3)}
+  .q-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:32px 28px;box-shadow:0 8px 32px rgba(0,0,0,.3)}
   .q-title{font-size:19px;font-weight:700;line-height:1.6;margin-bottom:22px}
   .options{display:flex;flex-direction:column;gap:10px}
   .option{display:flex;align-items:center;gap:12px;padding:15px 18px;border-radius:12px;border:1.5px solid var(--border);background:var(--bg);cursor:pointer;transition:all .2s;font-size:15px;line-height:1.5;text-align:left;width:100%;font-family:inherit;color:var(--text)}
@@ -72,68 +75,89 @@
   /* ── Analyzing ── */
   .analyzing{text-align:center;padding:60px 20px}
   .analyzing .spinner{width:56px;height:56px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 24px}
-  .analyzing h3{font-size:18px;margin-bottom:8px}
-  .analyzing .log{font-size:13px;color:var(--muted);line-height:2}
-  .analyzing .log span{display:block;animation:fadeIn .3s ease;margin-bottom:2px}
-  .analyzing .log .done{color:var(--green)}
+  .analyzing h3{font-size:18px;margin-bottom:12px}
+  .analyzing .log{font-size:14px;color:var(--muted);line-height:2.2;display:flex;flex-direction:column;align-items:center;gap:2px}
+  .analyzing .log span{display:block;animation:fadeIn .3s ease}
 
-  /* ── Lottery Page ── */
-  .lottery{text-align:center;padding:20px 0}
-  .lottery .stage-label{font-size:13px;color:var(--accent);font-weight:700;letter-spacing:1px;margin-bottom:8px;transition:all .3s}
-  .lottery .scan-header{font-size:16px;color:var(--muted);margin-bottom:20px}
-  .name-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;max-width:420px;margin:0 auto 20px}
-  .name-tag{
-    position:relative;padding:14px 8px;border-radius:10px;
-    background:var(--card);border:1.5px solid var(--border);
-    font-size:16px;font-weight:700;letter-spacing:1px;
-    transition:all .4s;overflow:hidden;
+  /* ═══════════ DATABASE PAGE — full-screen scrolling ═══════════ */
+  .db-page{overflow:hidden}
+  .db-header{
+    position:sticky;top:0;z-index:10;
+    background:linear-gradient(180deg,var(--bg) 60%,transparent);
+    padding:16px 0 10px;text-align:center;
   }
-  .name-tag.flash{background:rgba(88,166,255,.1);border-color:var(--accent)}
-  .name-tag.eliminated{
-    color:var(--muted);border-color:rgba(248,81,73,.3);
-    animation:shake .4s ease;
-  }
-  .name-tag.eliminated::after{
-    content:'';position:absolute;top:50%;left:10%;width:80%;height:2px;
-    background:var(--red);transform:translateY(-50%);
-    animation:strikeThrough .35s ease forwards;
-  }
-  .name-tag .cross-mark{
-    position:absolute;top:4px;right:8px;font-size:12px;color:var(--red);
-    display:none;
-  }
-  .name-tag.eliminated .cross-mark{display:block;animation:popIn .3s ease}
-  .name-tag.target{
-    border-color:var(--green);background:rgba(63,185,80,.08);
-    box-shadow:0 0 20px rgba(63,185,80,.15);transform:scale(1.05);
-  }
-  .name-tag.target.pulse{animation:float 2s ease-in-out infinite}
+  .db-header .stage-label{font-size:12px;color:var(--accent);font-weight:700;letter-spacing:1px;margin-bottom:4px}
+  .db-header .info-line{font-size:14px;color:var(--muted)}
+  .db-header .info-line .count{color:var(--text);font-weight:700}
+  .db-header .info-line .hi{color:var(--red)}
+  .db-header .info-line .lo{color:var(--green)}
 
-  /* ── Reveal Phase ── */
-  .reveal-area{text-align:center;margin-top:16px}
-  .reveal-char{
-    display:inline-block;font-size:56px;font-weight:900;padding:8px 14px;
-    margin:0 6px;border-radius:12px;
-    background:linear-gradient(135deg,var(--accent),var(--accent2));
-    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  .scan-overlay{
+    position:absolute;left:0;right:0;height:40px;z-index:5;
+    background:linear-gradient(180deg,transparent,rgba(88,166,255,.12),transparent);
+    animation:scanLine 1.8s linear infinite;pointer-events:none;border-radius:4px;
+  }
+
+  .name-grid-db{
+    display:flex;flex-wrap:wrap;gap:5px;justify-content:center;
+    padding:10px 8px 40px;position:relative;
+    max-height:60vh;overflow-y:auto;
+    mask-image:linear-gradient(to bottom,transparent 0%,#000 8%,#000 92%,transparent 100%);
+    -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 8%,#000 92%,transparent 100%);
+  }
+  .name-pill{
+    padding:5px 10px;border-radius:14px;font-size:13px;font-weight:500;
+    background:var(--card);border:1.5px solid var(--border);color:var(--muted);
+    transition:all .2s;white-space:nowrap;display:inline-block;
+    overflow:hidden;max-width:120px;min-width:0;
+  }
+  .name-pill.flash{background:rgba(88,166,255,.1);border-color:var(--accent);color:var(--text)}
+  .name-pill.eliminated{
+    animation:collapseOut .3s ease-in forwards;
+    pointer-events:none;
+  }
+  .name-pill.survivor{
+    background:rgba(63,185,80,.15);border-color:var(--green);color:var(--green);
+    font-size:16px;font-weight:900;padding:8px 18px;
+    z-index:20;box-shadow:0 0 24px rgba(63,185,80,.3);
     animation:popIn .5s ease;
   }
-  .reveal-char.delay{animation-delay:.4s;opacity:0;animation-fill-mode:forwards}
-  .reveal-divider{display:inline-block;width:2px;height:40px;background:var(--border);margin:0 10px}
+  .name-pill.target-final{
+    background:rgba(63,185,80,.2);border-color:var(--green);color:var(--green);
+    font-size:28px;font-weight:900;padding:14px 32px;
+    z-index:30;box-shadow:0 0 50px rgba(63,185,80,.6),0 0 100px rgba(63,185,80,.2);
+    animation:survivorPulse 1.5s ease-in-out infinite;
+    transition:all .6s cubic-bezier(.34,1.56,.64,1);
+  }
+  @keyframes survivorPulse{
+    0%,100%{box-shadow:0 0 50px rgba(63,185,80,.6),0 0 100px rgba(63,185,80,.2)}
+    50%{box-shadow:0 0 80px rgba(63,185,80,.9),0 0 160px rgba(63,185,80,.4)}
+  }
 
-  .locked-badge{
-    display:inline-block;padding:8px 20px;border-radius:8px;
+  .reveal-overlay{
+    position:fixed;top:0;left:0;right:0;bottom:0;
+    background:rgba(13,17,23,.92);z-index:50;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+  }
+  .reveal-overlay .char-row{display:flex;gap:16px;align-items:center;margin-bottom:10px}
+  .reveal-overlay .big-char{
+    font-size:72px;font-weight:900;opacity:0;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+  .reveal-overlay .locked-badge{
+    padding:8px 20px;border-radius:8px;
     background:rgba(63,185,80,.12);border:1.5px solid var(--green);
     color:var(--green);font-size:18px;font-weight:900;letter-spacing:2px;
-    animation:lockBounce .6s ease;margin-top:12px;
+    animation:lockBounce .6s ease;margin-top:8px;opacity:0;
   }
-  .locked-sub{font-size:12px;color:var(--muted);margin-top:8px}
+  .reveal-overlay .locked-sub{font-size:12px;color:var(--muted);margin-top:6px;opacity:0}
 
   /* ── Result ── */
-  .result-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:36px 28px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.3)}
-  .result-card .reveal-label{font-size:14px;color:var(--muted);margin-bottom:16px;letter-spacing:1px}
+  .result-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:36px 28px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.3)}
+  .result-card .reveal-label{font-size:14px;color:var(--muted);margin-bottom:14px}
   .result-card .the-name{font-size:48px;font-weight:900;margin-bottom:6px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:glitch .3s ease 2}
-  .result-card .analysis{text-align:left;background:var(--bg);border-radius:12px;padding:20px;margin-bottom:20px;font-size:14px;line-height:1.8}
+  .result-card .analysis{text-align:left;background:var(--bg);border-radius:12px;padding:20px;margin:16px 0;font-size:14px;line-height:1.8}
   .result-card .analysis .row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)}
   .result-card .analysis .row:last-child{border-bottom:none}
   .result-card .analysis .label{color:var(--muted)}
@@ -141,15 +165,15 @@
   .conf-bar{height:4px;background:var(--border);border-radius:2px;margin-top:4px;overflow:hidden}
   .conf-fill{height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));border-radius:2px}
   .result-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:20px}
-  .easter-egg{font-size:11px;color:var(--muted);margin-top:16px;opacity:.6}
 
   @media(max-width:480px){
     .landing h1{font-size:22px}
     .result-card .the-name{font-size:36px}
     .q-title{font-size:17px}
     .q-card,.result-card{padding:24px 18px}
-    .reveal-char{font-size:40px}
-    .name-tag{font-size:14px;padding:10px 6px}
+    .reveal-overlay .big-char{font-size:52px}
+    .name-pill{font-size:12px;padding:4px 8px}
+    .name-pill.target-final{font-size:22px;padding:10px 22px}
   }
 </style>
 </head>
@@ -197,14 +221,14 @@
     </div>
   </div>
 
-  <!-- ═══════ NAME LOTTERY ═══════ -->
-  <div class="page" id="page-lottery">
-    <div class="lottery">
-      <div class="stage-label" id="stage-label">🔍 正在扫描姓名数据库……</div>
-      <div class="scan-header" id="scan-header"></div>
-      <div class="name-grid" id="name-grid"></div>
-      <div class="reveal-area" id="reveal-area" style="display:none"></div>
+  <!-- ═══════ DATABASE LOTTERY ═══════ -->
+  <div class="page db-page" id="page-db">
+    <div class="db-header">
+      <div class="stage-label" id="stage-label">🔍 正在连接姓名数据库……</div>
+      <div class="info-line" id="info-line"></div>
     </div>
+    <div class="scan-overlay" id="scan-overlay"></div>
+    <div class="name-grid-db" id="name-grid-db"></div>
   </div>
 
   <!-- ═══════ RESULT ═══════ -->
@@ -212,7 +236,7 @@
     <div class="result-card">
       <div class="reveal-label">🔮 神经网络推演完成</div>
       <div class="the-name" id="the-name"></div>
-      <p style="color:var(--muted);font-size:14px;margin-bottom:16px">你的名字是——</p>
+      <p style="color:var(--muted);font-size:14px;margin-bottom:14px">你的名字是——</p>
       <div class="analysis">
         <div class="row"><span class="label">🧬 笔画特征匹配</span><span class="val" id="r1">—</span></div>
         <div class="conf-bar" style="margin-bottom:8px"><div class="conf-fill" style="width:0%" id="b1"></div></div>
@@ -227,13 +251,24 @@
         <button class="btn btn-primary" onclick="restartQuiz()">🔄 再测一次（结果一样）</button>
         <button class="btn btn-ghost" onclick="shareResult()">📤 发给朋友试试</button>
       </div>
-      <p class="easter-egg">⚠️ 本测试仅识别「谢忱」一人。如果你不叫谢忱……可能是你记错了。</p>
     </div>
+  </div>
+
+  <!-- ═══════ REVEAL OVERLAY (inside db page) ═══════ -->
+  <div class="reveal-overlay" id="reveal-overlay" style="display:none">
+    <p style="color:var(--muted);font-size:14px;margin-bottom:18px">⚠️ 锁定目标姓名</p>
+    <div class="char-row">
+      <span class="big-char" id="big-char-1">谢</span>
+      <span class="big-char" id="big-char-2">忱</span>
+    </div>
+    <div class="locked-badge" id="locked-badge">🔒 LOCKED</div>
+    <p class="locked-sub" id="locked-sub">不管你怎么选，都是这个结果</p>
   </div>
 
 </div>
 
 <script>
+// ═══════════════ QUESTIONS ═══════════════
 const questions = [
   { q:'你平时更喜欢哪种颜色？', opts:['蓝色系 🌊','红色系 🔥','绿色系 🌿','紫色系 🔮','黑白灰 ⚫','看心情，没有固定偏好'] },
   { q:'早上醒来第一件事通常是？', opts:['看手机 📱','喝水 🥤','发呆 🤔','上厕所 🚽','关闹钟继续睡 😴','看心情'] },
@@ -242,19 +277,95 @@ const questions = [
   { q:'想象你站在一个十字路口，凭第一直觉——你往哪走？', opts:['直走 ⬆️ —— 不犹豫，向前就对了','左转 ⬅️ —— 换个方向看看','右转 ➡️ —— 直觉说右边有好事','原地不动 🧍 —— 先想想再决定','回头 🔙 —— 走过的路最安全','闭上眼睛随便走 —— 命运安排'] },
 ];
 
-// ── Fake name pool ──
-const FAKE_NAMES = ['张伟','李娜','王芳','刘洋','陈静','杨帆','黄蕾','周涛','吴鑫','赵敏','孙浩','马超','郑爽','高原','林涛','徐静'];
-const TARGET = '谢忱';
+// ═══════════════ NAME GENERATOR — Realistic Chinese Names ═══════════════
+const SURNAMES = [
+  '李','王','张','刘','陈','杨','赵','黄','周','吴','徐','孙','胡','朱','高','林','何','郭','马','罗',
+  '梁','宋','郑','韩','唐','冯','于','董','萧','程','曹','袁','邓','许','傅','沈','曾','彭','吕','苏',
+  '卢','蒋','蔡','贾','丁','魏','薛','叶','阎','余','潘','杜','戴','夏','钟','汪','田','任','姜','范',
+  '方','石','姚','谭','廖','邹','熊','金','陆','郝','孔','白','崔','康','毛','邱','秦','江','史','顾',
+  '侯','邵','孟','龙','万','段','雷','钱','汤','尹','黎','易','常','武','乔','贺','赖','龚','文','庞',
+  '樊','兰','殷','施','洪','翟','安','颜','倪','严','牛','温','芦','季','俞','章','鲁','葛','伍','韦',
+  '申','尤','毕','聂','丛','焦','向','柳','邢','骆','岳','齐','尚','梅','莫','庄','辛','管','祝','左',
+  '涂','谷','祁','时','舒','耿','牟','卜','路','詹','关','苗','凌','费','纪','靳','盛','童','欧','甄',
+  '项','曲','成','游','阳','裴','席','卫','查','屈','鲍','覃','霍','翁','隋','植','甘','景','薄','单',
+  '包','司','柏','宁','柯','阮','桂','闵','欧阳','司马','上官','皇甫','宇文','慕容','司徒','令狐',
+];
 
+const GIVEN_M = [
+  '伟','强','磊','军','勇','杰','涛','明','超','华','林','鹏','飞','辉','浩','宇','轩','然','博','文',
+  '晨','阳','昊','泽','睿','毅','恒','远','峰','俊','哲','宁','凯','铭','源','瑞','安','平','刚','彬',
+  '亮','龙','威','建','斌','旭','宏','健','康','敏','松','波','海','洋','东','国','全','洪','春','秋',
+  '思','之','若','则','其','为','以','有','可','知','行','正','清','云','雨','雪','风','雷','山','石',
+  '树','木','剑','书','棋','画','琴','鸣','啸','吟','逸','修','诚','信','义','仁','礼','孝','忠','良',
+  '彦','才','英','豪','雄','杰','俊','秀','雅','贤','德','厚','道','通','达','畅','顺','利','亨','贞',
+  '立','志','承','启','开','拓','创','新','进','取','守','成','兴','盛','昌','隆','茂','丰','盈','满',
+  '天','地','宇','宙','星','辰','日','月','光','彩','锦','绣','金','玉','宝','珍','珠','贝','瑶','琳',
+];
+
+const GIVEN_F = [
+  '芳','敏','静','丽','婷','雪','琳','玲','娜','莉','慧','娟','霞','燕','萍','红','梅','兰','凤','洁',
+  '秀','英','云','蓉','倩','晶','颖','怡','瑶','佳','悦','萱','蕊','薇','蕾','彤','文','雨','诗','涵',
+  '琪','欣','瑜','艺','馨','怡','月','晓','若','灵','曼','素','秋','春','夏','冬','露','霜','冰','清',
+  '雅','纯','真','善','美','妙','婉','柔','淑','娴','姿','容','仪','姣','婵','娟','娇','娥','妃','姬',
+  '如','意','心','爱','思','念','忆','盼','望','期','梦','幻','烟','波','涛','澜','涟','漪','沫','浅',
+  '宁','安','平','和','悦','乐','欢','喜','嘉','佑','瑞','祥','福','禄','寿','康','健','吉','庆','贺',
+  '之','以','然','尔','兮','若','其','为','可','能','非','无','有','在','于','与','从','因','由','自',
+  '初','元','启','承','继','绍','续','延','永','长','久','恒','常','时','新','鲜','生','活','润','泽',
+];
+
+const TARGET = '谢忱';
+const RENDER_COUNT = 500;           // Actually rendered pills
+const FAKE_TOTAL = 24354255;        // The BIG number shown on screen
+
+function generateNames(count) {
+  const names = new Set();
+  names.add(TARGET); // Ensure target is in the pool
+
+  while (names.size < count) {
+    const surname = SURNAMES[Math.floor(Math.random() * SURNAMES.length)];
+    // Mix male and female given names for variety
+    const pool = Math.random() < 0.5 ? GIVEN_M : GIVEN_F;
+    const g1 = pool[Math.floor(Math.random() * pool.length)];
+    // ~30% chance of single-character given name
+    let given;
+    if (Math.random() < 0.3) {
+      given = g1;
+    } else {
+      const g2 = pool[Math.floor(Math.random() * pool.length)];
+      given = g1 + g2;
+    }
+    const full = surname + given;
+    // Filter out names that are too short/long or weird
+    if (full.length >= 2 && full.length <= 4) {
+      names.add(full);
+    }
+  }
+
+  // Remove target from set, we'll insert it at a specific position
+  names.delete(TARGET);
+  const arr = [...names];
+  // Shuffle
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  // Insert target at a random position (not too early, not too late — middle-ish)
+  const targetPos = Math.floor(arr.length * 0.3) + Math.floor(Math.random() * arr.length * 0.4);
+  arr.splice(targetPos, 0, TARGET);
+  return { names: arr, targetIdx: targetPos };
+}
+
+// ═══════════════ QUIZ LOGIC ═══════════════
 let currentQ = 0;
 
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
+  document.getElementById('reveal-overlay').style.display = 'none';
+  const pg = document.getElementById('page-'+id);
+  if(pg) pg.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// ═══════════ QUIZ ═══════════
 function startQuiz(){currentQ=0;showPage('quiz');renderQuestion()}
 
 function renderQuestion(){
@@ -279,151 +390,200 @@ function highlightOpt(idx){document.querySelectorAll('.option').forEach(o=>o.cla
 function selectOption(idx){window['_sel'+currentQ]=idx;highlightOpt(idx)}
 function nextQuestion(){if(window['_sel'+currentQ]===undefined)return;if(currentQ<questions.length-1){currentQ++;renderQuestion()}}
 
-// ═══════════ ANALYZING ═══════════
+// ═══════════════ ANALYZING ═══════════════
 function startAnalyzing(){
   if(window['_sel'+currentQ]===undefined)return;
   showPage('analyzing');
   const log=document.getElementById('analyze-log');
-  const msgs=['🧬 提取选择特征向量……','🔢 匹配笔画分布模型……','🗣️ 音韵频率分析中……','📊 对比 120 万组姓名数据……','🎯 锁定唯一匹配……'];
+  const fakeTotalWan = (FAKE_TOTAL / 10000).toFixed(0);
+  const msgs=['🧬 提取选择特征向量……','🔢 匹配笔画分布模型……','🗣️ 音韵频率分析中……',`📊 对比 ${fakeTotalWan} 万组姓名数据……`,'🎯 锁定唯一匹配……'];
   log.innerHTML='';
   let i=0;
   const iv=setInterval(()=>{
     if(i<msgs.length){
-      const span=document.createElement('span');span.textContent=msgs[i];
-      if(i===msgs.length-1)span.classList.add('done');
+      const span=document.createElement('span');
+      span.textContent=msgs[i];
+      if(i===msgs.length-1) span.style.color='var(--green)';
       log.appendChild(span);i++;
-    }else{clearInterval(iv);setTimeout(startLottery,500)}
+    }else{clearInterval(iv);setTimeout(startDatabaseLottery,400)}
   },500);
 }
 
-// ═══════════ NAME LOTTERY — THE SHOW ═══════════
-function startLottery(){
-  showPage('lottery');
+// ═══════════════ DATABASE LOTTERY — THE BIG SHOW ═══════════════
+let _dbData = null;
 
-  // Build name pool: shuffle fake names, pick 11, insert target at random position
-  const shuffled = FAKE_NAMES.sort(()=>Math.random()-.5).slice(0,11);
-  const targetIdx = Math.floor(Math.random()*12);
-  const allNames = [...shuffled];
-  allNames.splice(targetIdx,0,TARGET); // 12 names total
+function startDatabaseLottery(){
+  showPage('db');
+  document.getElementById('reveal-overlay').style.display = 'none';
 
-  const grid = document.getElementById('name-grid');
-  grid.innerHTML = allNames.map((n,i)=>`
-    <div class="name-tag" id="nt-${i}" data-name="${n}" data-idx="${i}">
-      ${n}<span class="cross-mark">✕</span>
-    </div>
-  `).join('');
+  _dbData = generateNames(RENDER_COUNT);
+  const { names } = _dbData;
 
-  document.getElementById('stage-label').textContent = '🔍 正在扫描姓名数据库……';
-  document.getElementById('scan-header').textContent = `匹配到 ${allNames.length} 个候选姓名`;
-  document.getElementById('reveal-area').style.display = 'none';
+  const grid = document.getElementById('name-grid-db');
+  grid.innerHTML = names.map((n, i) =>
+    `<span class="name-pill" id="pill-${i}" data-name="${n}">${n}</span>`
+  ).join('');
 
-  // Phase 1: Flash names one by one (scanning effect)
-  let phase1Idx = 0;
-  const p1 = setInterval(()=>{
-    if(phase1Idx < allNames.length){
-      const prev = document.getElementById('nt-'+(phase1Idx-1));
-      if(prev) prev.classList.remove('flash');
-      const cur = document.getElementById('nt-'+phase1Idx);
-      if(cur) cur.classList.add('flash');
-      phase1Idx++;
-    } else {
-      clearInterval(p1);
-      const last = document.getElementById('nt-'+(allNames.length-1));
-      if(last) last.classList.remove('flash');
-      setTimeout(eliminatePhase, 800);
-    }
-  }, 180);
+  document.getElementById('stage-label').textContent = '🔍 正在连接姓名数据库……';
+  document.getElementById('info-line').innerHTML = `数据库共 <span class="count">${FAKE_TOTAL.toLocaleString()}</span> 条记录 — 正在扫描匹配……`;
+  document.getElementById('scan-overlay').style.display = 'block';
 
-  // Store state for later phases
-  window._lotteryNames = allNames;
-  window._targetIdx = targetIdx;
+  // scroll to a random position to look "live"
+  setTimeout(() => {
+    grid.scrollTop = Math.random() * (grid.scrollHeight - grid.clientHeight);
+  }, 300);
+
+  // Phase 1: Flashing scan — rows of pills light up
+  flashScanPhase(names, () => {
+    // Phase 2: Elimination
+    eliminatePhase(names, () => {
+      // Phase 3: Reveal
+      revealTargetPhase();
+    });
+  });
 }
 
-function eliminatePhase(){
-  const allNames = window._lotteryNames;
-  const targetIdx = window._targetIdx;
-  document.getElementById('stage-label').textContent = '✂️ 排除不匹配项……';
-  document.getElementById('scan-header').textContent = '';
+function flashScanPhase(names, done) {
+  const grid = document.getElementById('name-grid-db');
+  const totalPills = names.length;
+  let scanned = 0;
+  let fakeScanned = 0;
+  const batchSize = 40;
+  const fakePerBatch = Math.floor(FAKE_TOTAL / (totalPills / batchSize)); // spread fake total across batches
 
-  // Get elimination order: all indices except target, shuffled
-  const toEliminate = allNames.map((_,i)=>i).filter(i=>i!==targetIdx);
-  // Shuffle
-  for(let i=toEliminate.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[toEliminate[i],toEliminate[j]]=[toEliminate[j],toEliminate[i]]}
+  const iv = setInterval(() => {
+    // Flash a batch
+    for (let i = 0; i < batchSize && scanned < totalPills; i++, scanned++) {
+      const pill = document.getElementById('pill-' + scanned);
+      if (pill) pill.classList.add('flash');
+    }
+    // Un-flash previous batch
+    const prevStart = scanned - batchSize * 2;
+    for (let i = Math.max(0, prevStart); i < Math.max(0, scanned - batchSize); i++) {
+      const pill = document.getElementById('pill-' + i);
+      if (pill) pill.classList.remove('flash');
+    }
+    // Scroll faster
+    grid.scrollTop += 8;
 
-  let elimIdx = 0;
-  const iv = setInterval(()=>{
-    if(elimIdx < toEliminate.length){
-      const el = document.getElementById('nt-'+toEliminate[elimIdx]);
-      if(el) el.classList.add('eliminated');
-      document.getElementById('scan-header').textContent = `已排除 ${elimIdx+1} 个……`;
-      elimIdx++;
-    } else {
+    fakeScanned = Math.min(Math.floor(scanned / totalPills * FAKE_TOTAL), FAKE_TOTAL);
+    document.getElementById('info-line').innerHTML =
+      `已扫描 <span class="count">${fakeScanned.toLocaleString()}</span> / ${FAKE_TOTAL.toLocaleString()} 条记录……`;
+
+    if (scanned >= totalPills) {
       clearInterval(iv);
-      // Highlight the survivor
-      const survivor = document.getElementById('nt-'+targetIdx);
-      if(survivor){
-        survivor.classList.add('target');
-        document.getElementById('scan-header').textContent = '⚠️ 仅剩一个匹配项 ——';
-      }
-      setTimeout(highlightTarget, 600);
+      // Clear remaining flashes
+      document.querySelectorAll('.name-pill.flash').forEach(p => p.classList.remove('flash'));
+      document.getElementById('info-line').innerHTML =
+        `扫描完成！<span class="count">${FAKE_TOTAL.toLocaleString()}</span> 条记录全部过了一遍`;
+      document.getElementById('scan-overlay').style.display = 'none';
+      document.getElementById('stage-label').textContent = '✂️ 正在排除不匹配项……';
+      setTimeout(done, 300);
     }
-  }, 350);
+  }, 25);
 }
 
-function highlightTarget(){
-  const targetIdx = window._targetIdx;
-  const survivor = document.getElementById('nt-'+targetIdx);
-  document.getElementById('stage-label').textContent = '🎯 锁定目标姓名！';
+function eliminatePhase(names, done) {
+  const targetIdx = _dbData.targetIdx;
+  const grid = document.getElementById('name-grid-db');
 
-  // Pulse the survivor
-  if(survivor) survivor.classList.add('pulse');
+  const toElim = names.map((_, i) => i).filter(i => i !== targetIdx);
+  for (let i = toElim.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [toElim[i], toElim[j]] = [toElim[j], toElim[i]];
+  }
 
-  setTimeout(charReveal, 1000);
+  let elimCount = 0;
+  const batchSize = 20;
+  let fakeEliminated = 0;
+  let fakeRemaining = FAKE_TOTAL;
+
+  const iv = setInterval(() => {
+    const batch = toElim.slice(elimCount, elimCount + batchSize);
+    if (batch.length === 0) {
+      clearInterval(iv);
+      document.getElementById('info-line').innerHTML =
+        `已排除 <span class="hi">${(FAKE_TOTAL - 1).toLocaleString()}</span> 条 · 剩余 <span class="lo">1</span> 条匹配`;
+      // Remove all eliminated pills from DOM so survivor naturally centers in flex
+      document.querySelectorAll('.name-pill.eliminated').forEach(p => p.remove());
+      const survivorPill = document.getElementById('pill-' + targetIdx);
+      if (survivorPill) {
+        survivorPill.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      setTimeout(done, 500);
+      return;
+    }
+
+    batch.forEach(idx => {
+      const pill = document.getElementById('pill-' + idx);
+      if (pill) pill.classList.add('eliminated');
+    });
+
+    elimCount += batch.length;
+    fakeEliminated = Math.floor(elimCount / toElim.length * (FAKE_TOTAL - 1));
+    fakeRemaining = FAKE_TOTAL - fakeEliminated;
+
+    document.getElementById('info-line').innerHTML =
+      `已排除 <span class="hi">${fakeEliminated.toLocaleString()}</span> 条 · 剩余 <span class="lo">${fakeRemaining.toLocaleString()}</span> 条`;
+  }, 60);
 }
 
-function charReveal(){
-  const reveal = document.getElementById('reveal-area');
-  reveal.style.display = 'block';
-  reveal.innerHTML = `
-    <p style="color:var(--muted);font-size:15px;margin-bottom:16px">正在推算具体字符……</p>
-    <div style="display:flex;align-items:center;justify-content:center;gap:4px">
-      <span class="reveal-char" id="char1" style="opacity:0">谢</span>
-      <span class="reveal-char delay" id="char2" style="opacity:0">忱</span>
-    </div>
-    <div id="locked-section" style="margin-top:12px"></div>
-  `;
+function revealTargetPhase(){
+  const targetIdx = _dbData.targetIdx;
+  document.getElementById('stage-label').textContent = '🎯 唯一匹配项锁定';
+  document.getElementById('info-line').innerHTML = '';
 
-  // Reveal first char
-  setTimeout(()=>{
-    const c1 = document.getElementById('char1');
-    if(c1){c1.style.opacity='1';c1.style.animation='popIn .5s ease'}
-  }, 600);
+  const survivor = document.getElementById('pill-' + targetIdx);
+  if (survivor) {
+    survivor.classList.add('survivor');
+    // After a brief pause, the survivor zooms up big
+    setTimeout(() => {
+      survivor.classList.add('target-final');
+      survivor.classList.remove('survivor');
+      // Scroll to center on the survivor
+      survivor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 600);
+  }
 
-  // Reveal second char
-  setTimeout(()=>{
-    const c2 = document.getElementById('char2');
-    if(c2){c2.style.opacity='1';c2.style.animation='popIn .5s ease'}
-  }, 1200);
+  // Let the spectator savor the moment — one green name alone on screen
+  setTimeout(() => { showRevealOverlay(); }, 1800);
+}
+
+function showRevealOverlay(){
+  const overlay = document.getElementById('reveal-overlay');
+  overlay.style.display = 'flex';
+
+  // Reveal first character
+  setTimeout(() => {
+    const c1 = document.getElementById('big-char-1');
+    if (c1) { c1.style.opacity = '1'; c1.style.animation = 'popIn .5s ease'; }
+  }, 400);
+
+  // Reveal second character
+  setTimeout(() => {
+    const c2 = document.getElementById('big-char-2');
+    if (c2) { c2.style.opacity = '1'; c2.style.animation = 'popIn .5s ease'; }
+  }, 900);
 
   // Locked badge
-  setTimeout(()=>{
-    const ls = document.getElementById('locked-section');
-    if(ls) ls.innerHTML = `
-      <div class="locked-badge">🔒 LOCKED</div>
-      <p class="locked-sub">不管你怎么选，都是这个结果</p>
-    `;
-  }, 1800);
+  setTimeout(() => {
+    const badge = document.getElementById('locked-badge');
+    const sub = document.getElementById('locked-sub');
+    if (badge) badge.style.opacity = '1';
+    if (sub) sub.style.opacity = '1';
+  }, 1400);
 
   // Transition to final result
-  setTimeout(()=>{showFinalResult()}, 2800);
+  setTimeout(() => { showFinalResult(); }, 2600);
 }
 
-// ═══════════ FINAL RESULT ═══════════
+// ═══════════════ FINAL RESULT ═══════════════
 function showFinalResult(){
+  document.getElementById('reveal-overlay').style.display = 'none';
   showPage('result');
   document.getElementById('the-name').textContent = TARGET;
 
-  const bars=[
+  const bars = [
     {el:document.getElementById('b1'),txt:document.getElementById('r1'),v:98.4,label:'98.4% — 极高'},
     {el:document.getElementById('b2'),txt:document.getElementById('r2'),v:96.1,label:'96.1% — 极高'},
     {el:document.getElementById('b3'),txt:document.getElementById('r3'),v:99.2,label:'99.2% — 极高'},
@@ -436,6 +596,7 @@ function showFinalResult(){
 
 function restartQuiz(){
   for(let i=0;i<questions.length;i++) delete window['_sel'+i];
+  _dbData = null;
   currentQ=0;startQuiz();
 }
 function shareResult(){
