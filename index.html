@@ -6,155 +6,150 @@
 <title>信不信我用5个问题就能知道你的名字</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
-
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
   :root{
-    --bg:#0d1117;
-    --card:#161b22;
-    --accent:#58a6ff;
-    --accent2:#7c3aed;
-    --text:#e6edf3;
-    --muted:#8b949e;
-    --border:#30363d;
-    --radius:14px;
+    --bg:#0d1117;--card:#161b22;--accent:#58a6ff;--accent2:#7c3aed;
+    --red:#f85149;--green:#3fb950;--text:#e6edf3;--muted:#8b949e;
+    --border:#30363d;--radius:14px;
   }
 
   body{
-    font-family:'Noto Sans SC',sans-serif;
-    background:var(--bg);
-    color:var(--text);
+    font-family:'Noto Sans SC',sans-serif;background:var(--bg);color:var(--text);
     min-height:100vh;display:flex;align-items:center;justify-content:center;
     padding:20px;
     background-image:
       radial-gradient(ellipse at 20% 20%,rgba(88,166,255,0.04) 0%,transparent 55%),
       radial-gradient(ellipse at 80% 80%,rgba(124,58,237,0.04) 0%,transparent 55%);
   }
-
   .container{width:100%;max-width:560px;position:relative}
-
   .page{display:none;animation:fadeIn .45s ease}
   .page.active{display:block}
 
   @keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
   @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
   @keyframes spin{to{transform:rotate(360deg)}}
-  @keyframes typing{from{width:0}to{width:100%}}
   @keyframes glitch{0%,100%{transform:translate(0)}20%{transform:translate(-2px,1px)}40%{transform:translate(2px,-1px)}60%{transform:translate(-1px,-1px)}80%{transform:translate(1px,1px)}}
+  @keyframes strikeThrough{from{width:0}to{width:100%}}
+  @keyframes popIn{0%{transform:scale(0);opacity:0}60%{transform:scale(1.2);opacity:1}100%{transform:scale(1);opacity:1}}
+  @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-4px)}40%{transform:translateX(4px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+  @keyframes lockBounce{0%{transform:scale(0) rotate(-10deg)}50%{transform:scale(1.3) rotate(3deg)}70%{transform:scale(.9) rotate(-1deg)}100%{transform:scale(1) rotate(0)}}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 
-  /* Landing */
+  /* ── Landing ── */
   .landing{text-align:center;padding:30px 0}
   .landing .icon{font-size:56px;display:block;animation:float 3s ease-in-out infinite}
-  .landing .badge{
-    display:inline-block;padding:5px 14px;border-radius:20px;
-    background:rgba(88,166,255,.12);color:var(--accent);font-size:12px;font-weight:600;
-    margin-bottom:16px;letter-spacing:.5px;
-  }
+  .landing .badge{display:inline-block;padding:5px 14px;border-radius:20px;background:rgba(88,166,255,.12);color:var(--accent);font-size:12px;font-weight:600;margin-bottom:16px;letter-spacing:.5px}
   .landing h1{font-size:28px;font-weight:900;line-height:1.4;margin-bottom:8px}
-  .landing h1 .hl{
-    background:linear-gradient(135deg,var(--accent),var(--accent2));
-    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  }
+  .landing h1 .hl{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
   .landing .sub{color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:28px}
   .landing .features{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:32px}
-  .landing .feat{
-    background:var(--card);border:1px solid var(--border);border-radius:10px;
-    padding:12px 16px;font-size:13px;color:var(--muted);text-align:center;
-    min-width:100px;flex:1;
-  }
+  .landing .feat{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:13px;color:var(--muted);text-align:center;min-width:100px;flex:1}
   .landing .feat span{display:block;font-size:22px;margin-bottom:4px}
 
-  .btn{
-    display:inline-block;padding:14px 44px;border-radius:50px;
-    font-size:16px;font-weight:700;border:none;cursor:pointer;
-    transition:all .25s;font-family:inherit;text-decoration:none;
-  }
-  .btn-primary{
-    background:linear-gradient(135deg,var(--accent),var(--accent2));
-    color:#fff;box-shadow:0 4px 24px rgba(88,166,255,.25);
-  }
+  .btn{display:inline-block;padding:14px 44px;border-radius:50px;font-size:16px;font-weight:700;border:none;cursor:pointer;transition:all .25s;font-family:inherit;text-decoration:none}
+  .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 4px 24px rgba(88,166,255,.25)}
   .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(88,166,255,.4)}
-  .btn-ghost{
-    background:transparent;color:var(--muted);border:1px solid var(--border);
-  }
+  .btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border)}
   .btn-ghost:hover{color:var(--text);border-color:var(--muted)}
 
-  /* Quiz */
+  /* ── Quiz ── */
   .quiz-header{margin-bottom:20px}
   .steps{display:flex;gap:6px;margin-bottom:12px}
   .step{flex:1;height:3px;border-radius:2px;background:var(--border);transition:background .3s}
-  .step.done{background:var(--accent)}
-  .step.current{background:var(--accent2)}
+  .step.done{background:var(--accent)}.step.current{background:var(--accent2)}
   .q-badge{font-size:12px;color:var(--accent);font-weight:700;margin-bottom:6px}
-  .q-card{
-    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-    padding:32px 28px;box-shadow:0 8px 32px rgba(0,0,0,.3);
-  }
+  .q-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:32px 28px;box-shadow:0 8px 32px rgba(0,0,0,.3)}
   .q-title{font-size:19px;font-weight:700;line-height:1.6;margin-bottom:22px}
   .options{display:flex;flex-direction:column;gap:10px}
-  .option{
-    display:flex;align-items:center;gap:12px;
-    padding:15px 18px;border-radius:12px;
-    border:1.5px solid var(--border);background:var(--bg);
-    cursor:pointer;transition:all .2s;font-size:15px;line-height:1.5;
-    text-align:left;width:100%;font-family:inherit;color:var(--text);
-  }
+  .option{display:flex;align-items:center;gap:12px;padding:15px 18px;border-radius:12px;border:1.5px solid var(--border);background:var(--bg);cursor:pointer;transition:all .2s;font-size:15px;line-height:1.5;text-align:left;width:100%;font-family:inherit;color:var(--text)}
   .option:hover{border-color:var(--accent);background:rgba(88,166,255,.04)}
   .option.selected{border-color:var(--accent);background:rgba(88,166,255,.08)}
-  .option .dot{
-    width:12px;height:12px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;transition:all .2s;
-  }
+  .option .dot{width:12px;height:12px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;transition:all .2s}
   .option.selected .dot{border-color:var(--accent);background:var(--accent)}
   .quiz-nav{margin-top:18px;display:flex;justify-content:flex-end}
 
-  /* Analyzing */
+  /* ── Analyzing ── */
   .analyzing{text-align:center;padding:60px 20px}
-  .analyzing .spinner{
-    width:56px;height:56px;border:3px solid var(--border);
-    border-top-color:var(--accent);border-radius:50%;
-    animation:spin .8s linear infinite;
-    margin:0 auto 24px;
-  }
+  .analyzing .spinner{width:56px;height:56px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 24px}
   .analyzing h3{font-size:18px;margin-bottom:8px}
   .analyzing .log{font-size:13px;color:var(--muted);line-height:2}
   .analyzing .log span{display:block;animation:fadeIn .3s ease;margin-bottom:2px}
-  .analyzing .log .done{color:#3fb950}
+  .analyzing .log .done{color:var(--green)}
 
-  /* Result */
-  .result-card{
-    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-    padding:36px 28px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.3);
+  /* ── Lottery Page ── */
+  .lottery{text-align:center;padding:20px 0}
+  .lottery .stage-label{font-size:13px;color:var(--accent);font-weight:700;letter-spacing:1px;margin-bottom:8px;transition:all .3s}
+  .lottery .scan-header{font-size:16px;color:var(--muted);margin-bottom:20px}
+  .name-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;max-width:420px;margin:0 auto 20px}
+  .name-tag{
+    position:relative;padding:14px 8px;border-radius:10px;
+    background:var(--card);border:1.5px solid var(--border);
+    font-size:16px;font-weight:700;letter-spacing:1px;
+    transition:all .4s;overflow:hidden;
   }
-  .result-card .reveal-label{
-    font-size:14px;color:var(--muted);margin-bottom:16px;letter-spacing:1px;
+  .name-tag.flash{background:rgba(88,166,255,.1);border-color:var(--accent)}
+  .name-tag.eliminated{
+    color:var(--muted);border-color:rgba(248,81,73,.3);
+    animation:shake .4s ease;
   }
-  .result-card .the-name{
-    font-size:48px;font-weight:900;margin-bottom:12px;
+  .name-tag.eliminated::after{
+    content:'';position:absolute;top:50%;left:10%;width:80%;height:2px;
+    background:var(--red);transform:translateY(-50%);
+    animation:strikeThrough .35s ease forwards;
+  }
+  .name-tag .cross-mark{
+    position:absolute;top:4px;right:8px;font-size:12px;color:var(--red);
+    display:none;
+  }
+  .name-tag.eliminated .cross-mark{display:block;animation:popIn .3s ease}
+  .name-tag.target{
+    border-color:var(--green);background:rgba(63,185,80,.08);
+    box-shadow:0 0 20px rgba(63,185,80,.15);transform:scale(1.05);
+  }
+  .name-tag.target.pulse{animation:float 2s ease-in-out infinite}
+
+  /* ── Reveal Phase ── */
+  .reveal-area{text-align:center;margin-top:16px}
+  .reveal-char{
+    display:inline-block;font-size:56px;font-weight:900;padding:8px 14px;
+    margin:0 6px;border-radius:12px;
     background:linear-gradient(135deg,var(--accent),var(--accent2));
     -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-    animation:glitch .3s ease 2;
+    animation:popIn .5s ease;
   }
-  .result-card .analysis{
-    text-align:left;background:var(--bg);border-radius:12px;padding:20px;
-    margin-bottom:20px;font-size:14px;line-height:1.8;
+  .reveal-char.delay{animation-delay:.4s;opacity:0;animation-fill-mode:forwards}
+  .reveal-divider{display:inline-block;width:2px;height:40px;background:var(--border);margin:0 10px}
+
+  .locked-badge{
+    display:inline-block;padding:8px 20px;border-radius:8px;
+    background:rgba(63,185,80,.12);border:1.5px solid var(--green);
+    color:var(--green);font-size:18px;font-weight:900;letter-spacing:2px;
+    animation:lockBounce .6s ease;margin-top:12px;
   }
-  .result-card .analysis .row{
-    display:flex;justify-content:space-between;padding:6px 0;
-    border-bottom:1px solid var(--border);
-  }
+  .locked-sub{font-size:12px;color:var(--muted);margin-top:8px}
+
+  /* ── Result ── */
+  .result-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:36px 28px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.3)}
+  .result-card .reveal-label{font-size:14px;color:var(--muted);margin-bottom:16px;letter-spacing:1px}
+  .result-card .the-name{font-size:48px;font-weight:900;margin-bottom:6px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:glitch .3s ease 2}
+  .result-card .analysis{text-align:left;background:var(--bg);border-radius:12px;padding:20px;margin-bottom:20px;font-size:14px;line-height:1.8}
+  .result-card .analysis .row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)}
   .result-card .analysis .row:last-child{border-bottom:none}
   .result-card .analysis .label{color:var(--muted)}
   .result-card .analysis .val{color:var(--text);font-weight:600}
   .conf-bar{height:4px;background:var(--border);border-radius:2px;margin-top:4px;overflow:hidden}
   .conf-fill{height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));border-radius:2px}
   .result-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:20px}
+  .easter-egg{font-size:11px;color:var(--muted);margin-top:16px;opacity:.6}
 
   @media(max-width:480px){
     .landing h1{font-size:22px}
     .result-card .the-name{font-size:36px}
     .q-title{font-size:17px}
     .q-card,.result-card{padding:24px 18px}
+    .reveal-char{font-size:40px}
+    .name-tag{font-size:14px;padding:10px 6px}
   }
 </style>
 </head>
@@ -167,11 +162,7 @@
       <span class="icon">🧠</span>
       <div class="badge">🤖 AI 神经网络分析引擎</div>
       <h1>信不信<br>我用 <span class="hl">5 个问题</span> 就能<br>知道你的<u>名字</u></h1>
-      <p class="sub">
-        基于深度学习的笔迹-姓名关联模型<br>
-        通过你的选择模式反向推演命名规律<br>
-        <span style="font-size:11px;color:var(--muted)">——已有 1,283,947 人参与验证，准确率 99.7%</span>
-      </p>
+      <p class="sub">基于深度学习的笔迹-姓名关联模型<br>通过你的选择模式反向推演命名规律<br><span style="font-size:11px;color:var(--muted)">——已有 1,283,947 人参与验证，准确率 99.7%</span></p>
       <div class="features">
         <div class="feat"><span>🧬</span>神经网路推演</div>
         <div class="feat"><span>⚡</span>5题即可锁定</div>
@@ -206,13 +197,22 @@
     </div>
   </div>
 
+  <!-- ═══════ NAME LOTTERY ═══════ -->
+  <div class="page" id="page-lottery">
+    <div class="lottery">
+      <div class="stage-label" id="stage-label">🔍 正在扫描姓名数据库……</div>
+      <div class="scan-header" id="scan-header"></div>
+      <div class="name-grid" id="name-grid"></div>
+      <div class="reveal-area" id="reveal-area" style="display:none"></div>
+    </div>
+  </div>
+
   <!-- ═══════ RESULT ═══════ -->
   <div class="page" id="page-result">
     <div class="result-card">
       <div class="reveal-label">🔮 神经网络推演完成</div>
       <div class="the-name" id="the-name"></div>
       <p style="color:var(--muted);font-size:14px;margin-bottom:16px">你的名字是——</p>
-
       <div class="analysis">
         <div class="row"><span class="label">🧬 笔画特征匹配</span><span class="val" id="r1">—</span></div>
         <div class="conf-bar" style="margin-bottom:8px"><div class="conf-fill" style="width:0%" id="b1"></div></div>
@@ -220,14 +220,14 @@
         <div class="conf-bar" style="margin-bottom:8px"><div class="conf-fill" style="width:0%" id="b2"></div></div>
         <div class="row"><span class="label">📐 姓名长度推算</span><span class="val" id="r3">—</span></div>
         <div class="conf-bar" style="margin-bottom:8px"><div class="conf-fill" style="width:0%" id="b3"></div></div>
-        <div class="row"><span class="label">🎯 综合置信度</span><span class="val" id="r4" style="color:#3fb950">—</span></div>
-        <div class="conf-bar"><div class="conf-fill" style="width:0%;background:#3fb950" id="b4"></div></div>
+        <div class="row"><span class="label">🎯 综合置信度</span><span class="val" id="r4" style="color:var(--green)">—</span></div>
+        <div class="conf-bar"><div class="conf-fill" style="width:0%;background:var(--green)" id="b4"></div></div>
       </div>
-
       <div class="result-actions">
         <button class="btn btn-primary" onclick="restartQuiz()">🔄 再测一次（结果一样）</button>
         <button class="btn btn-ghost" onclick="shareResult()">📤 发给朋友试试</button>
       </div>
+      <p class="easter-egg">⚠️ 本测试仅识别「谢忱」一人。如果你不叫谢忱……可能是你记错了。</p>
     </div>
   </div>
 
@@ -235,27 +235,16 @@
 
 <script>
 const questions = [
-  {
-    q:'你平时更喜欢哪种颜色？',
-    opts:['蓝色系 🌊','红色系 🔥','绿色系 🌿','紫色系 🔮','黑白灰 ⚫','看心情，没有固定偏好']
-  },
-  {
-    q:'早上醒来第一件事通常是？',
-    opts:['看手机 📱','喝水 🥤','发呆 🤔','上厕所 🚽','关闹钟继续睡 😴','看心情']
-  },
-  {
-    q:'如果选一种动物代表你的性格，你选？',
-    opts:['狗 🐕 —— 忠诚热情','猫 🐈 —— 独立自由','狼 🐺 —— 冷静果断','海豚 🐬 —— 聪明友善','猫头鹰 🦉 —— 深思熟虑','熊猫 🐼 —— 佛系躺平']
-  },
-  {
-    q:'你更喜欢哪种天气？',
-    opts:['晴天 ☀️ —— 元气满满','雨天 🌧️ —— 安静舒适','阴天 ☁️ —— 不冷不热刚刚好','雪天 ❄️ —— 浪漫安静的','刮风天 💨 —— 喜欢被风吹的感觉','无所谓']
-  },
-  {
-    q:'想象你站在一个十字路口，凭第一直觉——你往哪走？',
-    opts:['直走 ⬆️ —— 不犹豫，向前就对了','左转 ⬅️ —— 换个方向看看','右转 ➡️ —— 直觉说右边有好事','原地不动 🧍 —— 先想想再决定','回头 🔙 —— 走过的路最安全','闭上眼睛随便走 —— 命运安排']
-  },
+  { q:'你平时更喜欢哪种颜色？', opts:['蓝色系 🌊','红色系 🔥','绿色系 🌿','紫色系 🔮','黑白灰 ⚫','看心情，没有固定偏好'] },
+  { q:'早上醒来第一件事通常是？', opts:['看手机 📱','喝水 🥤','发呆 🤔','上厕所 🚽','关闹钟继续睡 😴','看心情'] },
+  { q:'如果选一种动物代表你的性格，你选？', opts:['狗 🐕 —— 忠诚热情','猫 🐈 —— 独立自由','狼 🐺 —— 冷静果断','海豚 🐬 —— 聪明友善','猫头鹰 🦉 —— 深思熟虑','熊猫 🐼 —— 佛系躺平'] },
+  { q:'你更喜欢哪种天气？', opts:['晴天 ☀️ —— 元气满满','雨天 🌧️ —— 安静舒适','阴天 ☁️ —— 不冷不热刚刚好','雪天 ❄️ —— 浪漫干净的','刮风天 💨 —— 喜欢被风吹的感觉','无所谓'] },
+  { q:'想象你站在一个十字路口，凭第一直觉——你往哪走？', opts:['直走 ⬆️ —— 不犹豫，向前就对了','左转 ⬅️ —— 换个方向看看','右转 ➡️ —— 直觉说右边有好事','原地不动 🧍 —— 先想想再决定','回头 🔙 —— 走过的路最安全','闭上眼睛随便走 —— 命运安排'] },
 ];
+
+// ── Fake name pool ──
+const FAKE_NAMES = ['张伟','李娜','王芳','刘洋','陈静','杨帆','黄蕾','周涛','吴鑫','赵敏','孙浩','马超','郑爽','高原','林涛','徐静'];
+const TARGET = '谢忱';
 
 let currentQ = 0;
 
@@ -265,94 +254,175 @@ function showPage(id){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function startQuiz(){
-  currentQ=0;
-  showPage('quiz');
-  renderQuestion();
-}
+// ═══════════ QUIZ ═══════════
+function startQuiz(){currentQ=0;showPage('quiz');renderQuestion()}
 
 function renderQuestion(){
   const q=questions[currentQ];
   document.getElementById('q-badge').textContent=`问题 ${currentQ+1} / ${questions.length}`;
   document.getElementById('q-title').textContent=q.q;
-
-  // step indicators
-  document.getElementById('steps').innerHTML = questions.map((_,i)=>{
-    let cls='step';
-    if(i<currentQ) cls+=' done';
-    if(i===currentQ) cls+=' current';
+  document.getElementById('steps').innerHTML=questions.map((_,i)=>{
+    let cls='step';if(i<currentQ)cls+=' done';if(i===currentQ)cls+=' current';
     return `<div class="${cls}"></div>`;
   }).join('');
-
-  document.getElementById('q-options').innerHTML = q.opts.map((opt,i)=>`
+  document.getElementById('q-options').innerHTML=q.opts.map((opt,i)=>`
     <button class="option" onclick="selectOption(${i})" id="opt-${i}">
       <span class="dot"></span><span>${opt}</span>
     </button>
   `).join('');
-
-  if(window['_sel'+currentQ]!==undefined){
-    highlightOpt(window['_sel'+currentQ]);
-  }
-
+  if(window['_sel'+currentQ]!==undefined) highlightOpt(window['_sel'+currentQ]);
   const btn=document.getElementById('btn-next');
-  if(currentQ===questions.length-1){
-    btn.textContent='🔮 计算我的名字';
-    btn.onclick=startAnalyzing;
-  }else{
-    btn.textContent='下一题 →';
-    btn.onclick=nextQuestion;
-  }
+  if(currentQ===questions.length-1){btn.textContent='🔮 计算我的名字';btn.onclick=startAnalyzing}
+  else{btn.textContent='下一题 →';btn.onclick=nextQuestion}
 }
+function highlightOpt(idx){document.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));const el=document.getElementById('opt-'+idx);if(el)el.classList.add('selected')}
+function selectOption(idx){window['_sel'+currentQ]=idx;highlightOpt(idx)}
+function nextQuestion(){if(window['_sel'+currentQ]===undefined)return;if(currentQ<questions.length-1){currentQ++;renderQuestion()}}
 
-function highlightOpt(idx){
-  document.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));
-  const el=document.getElementById('opt-'+idx);
-  if(el) el.classList.add('selected');
-}
-
-function selectOption(idx){
-  window['_sel'+currentQ]=idx;
-  highlightOpt(idx);
-}
-
-function nextQuestion(){
-  if(window['_sel'+currentQ]===undefined) return;
-  if(currentQ<questions.length-1){currentQ++;renderQuestion()}
-}
-
+// ═══════════ ANALYZING ═══════════
 function startAnalyzing(){
-  if(window['_sel'+currentQ]===undefined) return;
+  if(window['_sel'+currentQ]===undefined)return;
   showPage('analyzing');
-
   const log=document.getElementById('analyze-log');
-  const msgs=[
-    '🧬 提取选择特征向量……',
-    '🔢 匹配笔画分布模型……',
-    '🗣️ 音韵频率分析中……',
-    '📊 对比 120 万组姓名数据……',
-    '🎯 锁定唯一匹配……',
-  ];
+  const msgs=['🧬 提取选择特征向量……','🔢 匹配笔画分布模型……','🗣️ 音韵频率分析中……','📊 对比 120 万组姓名数据……','🎯 锁定唯一匹配……'];
   log.innerHTML='';
   let i=0;
   const iv=setInterval(()=>{
     if(i<msgs.length){
-      const span=document.createElement('span');
-      span.textContent=msgs[i];
-      if(i===msgs.length-1) span.classList.add('done');
-      log.appendChild(span);
-      i++;
-    }else{
-      clearInterval(iv);
-      setTimeout(showFinalResult,600);
-    }
+      const span=document.createElement('span');span.textContent=msgs[i];
+      if(i===msgs.length-1)span.classList.add('done');
+      log.appendChild(span);i++;
+    }else{clearInterval(iv);setTimeout(startLottery,500)}
   },500);
 }
 
+// ═══════════ NAME LOTTERY — THE SHOW ═══════════
+function startLottery(){
+  showPage('lottery');
+
+  // Build name pool: shuffle fake names, pick 11, insert target at random position
+  const shuffled = FAKE_NAMES.sort(()=>Math.random()-.5).slice(0,11);
+  const targetIdx = Math.floor(Math.random()*12);
+  const allNames = [...shuffled];
+  allNames.splice(targetIdx,0,TARGET); // 12 names total
+
+  const grid = document.getElementById('name-grid');
+  grid.innerHTML = allNames.map((n,i)=>`
+    <div class="name-tag" id="nt-${i}" data-name="${n}" data-idx="${i}">
+      ${n}<span class="cross-mark">✕</span>
+    </div>
+  `).join('');
+
+  document.getElementById('stage-label').textContent = '🔍 正在扫描姓名数据库……';
+  document.getElementById('scan-header').textContent = `匹配到 ${allNames.length} 个候选姓名`;
+  document.getElementById('reveal-area').style.display = 'none';
+
+  // Phase 1: Flash names one by one (scanning effect)
+  let phase1Idx = 0;
+  const p1 = setInterval(()=>{
+    if(phase1Idx < allNames.length){
+      const prev = document.getElementById('nt-'+(phase1Idx-1));
+      if(prev) prev.classList.remove('flash');
+      const cur = document.getElementById('nt-'+phase1Idx);
+      if(cur) cur.classList.add('flash');
+      phase1Idx++;
+    } else {
+      clearInterval(p1);
+      const last = document.getElementById('nt-'+(allNames.length-1));
+      if(last) last.classList.remove('flash');
+      setTimeout(eliminatePhase, 800);
+    }
+  }, 180);
+
+  // Store state for later phases
+  window._lotteryNames = allNames;
+  window._targetIdx = targetIdx;
+}
+
+function eliminatePhase(){
+  const allNames = window._lotteryNames;
+  const targetIdx = window._targetIdx;
+  document.getElementById('stage-label').textContent = '✂️ 排除不匹配项……';
+  document.getElementById('scan-header').textContent = '';
+
+  // Get elimination order: all indices except target, shuffled
+  const toEliminate = allNames.map((_,i)=>i).filter(i=>i!==targetIdx);
+  // Shuffle
+  for(let i=toEliminate.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[toEliminate[i],toEliminate[j]]=[toEliminate[j],toEliminate[i]]}
+
+  let elimIdx = 0;
+  const iv = setInterval(()=>{
+    if(elimIdx < toEliminate.length){
+      const el = document.getElementById('nt-'+toEliminate[elimIdx]);
+      if(el) el.classList.add('eliminated');
+      document.getElementById('scan-header').textContent = `已排除 ${elimIdx+1} 个……`;
+      elimIdx++;
+    } else {
+      clearInterval(iv);
+      // Highlight the survivor
+      const survivor = document.getElementById('nt-'+targetIdx);
+      if(survivor){
+        survivor.classList.add('target');
+        document.getElementById('scan-header').textContent = '⚠️ 仅剩一个匹配项 ——';
+      }
+      setTimeout(highlightTarget, 600);
+    }
+  }, 350);
+}
+
+function highlightTarget(){
+  const targetIdx = window._targetIdx;
+  const survivor = document.getElementById('nt-'+targetIdx);
+  document.getElementById('stage-label').textContent = '🎯 锁定目标姓名！';
+
+  // Pulse the survivor
+  if(survivor) survivor.classList.add('pulse');
+
+  setTimeout(charReveal, 1000);
+}
+
+function charReveal(){
+  const reveal = document.getElementById('reveal-area');
+  reveal.style.display = 'block';
+  reveal.innerHTML = `
+    <p style="color:var(--muted);font-size:15px;margin-bottom:16px">正在推算具体字符……</p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:4px">
+      <span class="reveal-char" id="char1" style="opacity:0">谢</span>
+      <span class="reveal-char delay" id="char2" style="opacity:0">忱</span>
+    </div>
+    <div id="locked-section" style="margin-top:12px"></div>
+  `;
+
+  // Reveal first char
+  setTimeout(()=>{
+    const c1 = document.getElementById('char1');
+    if(c1){c1.style.opacity='1';c1.style.animation='popIn .5s ease'}
+  }, 600);
+
+  // Reveal second char
+  setTimeout(()=>{
+    const c2 = document.getElementById('char2');
+    if(c2){c2.style.opacity='1';c2.style.animation='popIn .5s ease'}
+  }, 1200);
+
+  // Locked badge
+  setTimeout(()=>{
+    const ls = document.getElementById('locked-section');
+    if(ls) ls.innerHTML = `
+      <div class="locked-badge">🔒 LOCKED</div>
+      <p class="locked-sub">不管你怎么选，都是这个结果</p>
+    `;
+  }, 1800);
+
+  // Transition to final result
+  setTimeout(()=>{showFinalResult()}, 2800);
+}
+
+// ═══════════ FINAL RESULT ═══════════
 function showFinalResult(){
   showPage('result');
-  document.getElementById('the-name').textContent='谢忱';
+  document.getElementById('the-name').textContent = TARGET;
 
-  // Animate bars
   const bars=[
     {el:document.getElementById('b1'),txt:document.getElementById('r1'),v:98.4,label:'98.4% — 极高'},
     {el:document.getElementById('b2'),txt:document.getElementById('r2'),v:96.1,label:'96.1% — 极高'},
@@ -360,26 +430,18 @@ function showFinalResult(){
     {el:document.getElementById('b4'),txt:document.getElementById('r4'),v:99.7,label:'99.7% — 锁定'},
   ];
   bars.forEach((b,i)=>{
-    setTimeout(()=>{
-      b.el.style.width=b.v+'%';
-      b.txt.textContent=b.label;
-    },300*(i+1));
+    setTimeout(()=>{b.el.style.width=b.v+'%';b.txt.textContent=b.label},300*(i+1));
   });
 }
 
 function restartQuiz(){
   for(let i=0;i<questions.length;i++) delete window['_sel'+i];
-  currentQ=0;
-  startQuiz();
+  currentQ=0;startQuiz();
 }
-
 function shareResult(){
-  const text='🤯 一个网站号称用5个问题就能猜出我的名字，结果真的猜对了……\n\n你也试试：';
-  if(navigator.share){
-    navigator.share({title:'信不信我用5个问题就能知道你的名字',text});
-  }else{
-    navigator.clipboard.writeText(text).then(()=>alert('已复制，去发给朋友吧！🤯'));
-  }
+  const text='🤯 一个网站号称用5个问题就能猜出我的名字……结果它真的猜对了……\n\n你也来试试：';
+  if(navigator.share){navigator.share({title:'信不信我用5个问题就能知道你的名字',text})}
+  else{navigator.clipboard.writeText(text).then(()=>alert('已复制，去发给朋友吧！🤯'))}
 }
 </script>
 </body>
