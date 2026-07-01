@@ -257,10 +257,7 @@
   <!-- ═══════ REVEAL OVERLAY (inside db page) ═══════ -->
   <div class="reveal-overlay" id="reveal-overlay" style="display:none">
     <p style="color:var(--muted);font-size:14px;margin-bottom:18px">⚠️ 锁定目标姓名</p>
-    <div class="char-row">
-      <span class="big-char" id="big-char-1">谢</span>
-      <span class="big-char" id="big-char-2">忱</span>
-    </div>
+    <div class="char-row" id="char-row"></div>
     <div class="locked-badge" id="locked-badge">🔒 LOCKED</div>
     <p class="locked-sub" id="locked-sub">不管你怎么选，都是这个结果</p>
   </div>
@@ -313,7 +310,7 @@ const GIVEN_F = [
   '初','元','启','承','继','绍','续','延','永','长','久','恒','常','时','新','鲜','生','活','润','泽',
 ];
 
-const TARGET = '谢忱';
+const TARGET = '王丽萍';
 const RENDER_COUNT = 500;           // Actually rendered pills
 const FAKE_TOTAL = 24354255;        // The BIG number shown on screen
 
@@ -553,17 +550,22 @@ function showRevealOverlay(){
   const overlay = document.getElementById('reveal-overlay');
   overlay.style.display = 'flex';
 
-  // Reveal first character
-  setTimeout(() => {
-    const c1 = document.getElementById('big-char-1');
-    if (c1) { c1.style.opacity = '1'; c1.style.animation = 'popIn .5s ease'; }
-  }, 400);
+  // Dynamically generate character spans from TARGET
+  const row = document.getElementById('char-row');
+  row.innerHTML = TARGET.split('').map((ch, i) =>
+    `<span class="big-char" id="big-char-${i}" style="opacity:0">${ch}</span>`
+  ).join('');
 
-  // Reveal second character
-  setTimeout(() => {
-    const c2 = document.getElementById('big-char-2');
-    if (c2) { c2.style.opacity = '1'; c2.style.animation = 'popIn .5s ease'; }
-  }, 900);
+  // Reveal characters one by one
+  TARGET.split('').forEach((_, i) => {
+    setTimeout(() => {
+      const el = document.getElementById('big-char-' + i);
+      if (el) { el.style.opacity = '1'; el.style.animation = 'popIn .5s ease'; }
+    }, 400 + i * 500);
+  });
+
+  const charCount = TARGET.length;
+  const lastCharTime = 400 + (charCount - 1) * 500;
 
   // Locked badge
   setTimeout(() => {
@@ -571,10 +573,10 @@ function showRevealOverlay(){
     const sub = document.getElementById('locked-sub');
     if (badge) badge.style.opacity = '1';
     if (sub) sub.style.opacity = '1';
-  }, 1400);
+  }, lastCharTime + 500);
 
   // Transition to final result
-  setTimeout(() => { showFinalResult(); }, 2600);
+  setTimeout(() => { showFinalResult(); }, lastCharTime + 1500);
 }
 
 // ═══════════════ FINAL RESULT ═══════════════
